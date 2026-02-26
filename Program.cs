@@ -1,119 +1,95 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ZooLab
-{
-  abstract class Animal
-  {
+namespace ZooLab {
+  abstract class Animal {
     public string Name { get; set; }
     public int Age { get; set; }
     public string Habitat { get; set; }
     public string FoodType { get; set; }
 
-    protected Animal(string name, int age, string habitat, string foodType)
-    {
+    protected Animal(string name, int age, string habitat, string foodType) {
       Name = name;
       Age = age;
       Habitat = habitat;
       FoodType = foodType;
     }
 
-    public virtual string GetInfo()
-    {
+    public virtual string GetInfo() {
       return $"Name: {Name}, Age: {Age}, Habitat: {Habitat}, Food Type: {FoodType}";
     }
   }
 
-  class Mammal : Animal
-  {
+  class Mammal : Animal {
     public bool HasFur { get; set; }
+    public Mammal(string name, int age, string habitat, string foodType, bool hasFur) : base(name, age, habitat, foodType) {
 
-    public Mammal(string name, int age, string habitat, string foodType, bool hasFur) : base(name, age, habitat, foodType)
-    {
       HasFur = hasFur;
     }
 
-    public override string GetInfo()
-    {
+    public override string GetInfo() {
       return base.GetInfo() + $", Type: Mammal, Has Fur: {(HasFur ? "Yes" : "No")}";
     }
   }
 
-  class AnimalManager
-  {
+  class AnimalManager {
     private static AnimalManager instance;
     private List<Animal> animals = new List<Animal>();
 
     private AnimalManager() { }
 
-    public static AnimalManager Instance
-    {
-      get
-      {
+    public static AnimalManager Instance {
+      get {
         if (instance == null)
           instance = new AnimalManager();
         return instance;
       }
     }
 
-    public void AddAnimal(Animal animal)
-    {
+    public void AddAnimal(Animal animal) {
       animals.Add(animal);
     }
 
-    public void ShowAll()
-    {
+    public void ShowAll() {
       int currentIndex;
 
-      if (animals.Count == 0)
-      {
+      if (animals.Count == 0) {
         Console.WriteLine("Animal list is empty.");
         return;
       }
 
       currentIndex = 0;
 
-      while (currentIndex < animals.Count)
-      {
+      while (currentIndex < animals.Count) {
         Console.WriteLine($"{currentIndex + 1}. {animals[currentIndex].GetInfo()}");
         ++currentIndex;
       }
     }
 
-    public void ShowByNumber(int userNumber)
-    {
+    public void ShowByNumber(int userNumber) {
       int internalIndex;
 
       internalIndex = userNumber;
 
-      if (internalIndex > 0 && internalIndex <= animals.Count)
-      {
+      if (internalIndex > 0 && internalIndex <= animals.Count) {
         Console.WriteLine(
           animals[internalIndex - 1].GetInfo());
       }
-      else
-      {
+      else {
         Console.WriteLine("Invalid number.");
       }
     }
 
-    public void ShowMenu()
-    {
+    public void ShowMenu() {
       string userChoice;
       int parsedNumber;
 
-      while (true)
-      {
-        Console.WriteLine("\n=== MENU ===");
-        Console.WriteLine("1 - Show all animals");
-        Console.WriteLine("2 - Add new animal");
-        Console.WriteLine("3 - Show animal by number");
-        Console.WriteLine("0 - Exit");
+      while (true) {
+        Console.WriteLine("\n=== MENU ===" + "1 - Show all animals" + "2 - Add new animal" + "3 - Show animal by number" + "0 - Exit\n");
 
         userChoice = Console.ReadLine();
 
-        switch (userChoice)
-        {
+        switch (userChoice) {
           case "1":
             ShowAll();
             break;
@@ -140,8 +116,7 @@ namespace ZooLab
       }
     }
 
-    private void CreateAnimal()
-    {
+    private void CreateAnimal() {
       string name;
       int age;
       string habitat;
@@ -167,10 +142,8 @@ namespace ZooLab
     }
   }
 
-  class Program
-  {
-    static void Main()
-    {
+  class Program {
+    static void Main() {
       AnimalManager.Instance.AddAnimal(
         new Mammal("Leo", 5, "Savanna", "Carnivore", true));
 
