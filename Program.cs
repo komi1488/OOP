@@ -85,7 +85,7 @@ namespace ZooLab {
       int parsedNumber;
 
       while (true) {
-        Console.WriteLine("\n=== MENU ===" + "1 - Show all animals" + "2 - Add new animal" + "3 - Show animal by number" + "0 - Exit\n");
+        Console.WriteLine("\n=== MENU ===" + "\n1 - Show all animals" + "\n2 - Add new animal" + "\n3 - Show animal by number" + "\n0 - Exit\n");
 
         userChoice = Console.ReadLine();
 
