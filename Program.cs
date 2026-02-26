@@ -21,7 +21,6 @@ namespace ZooLab {
   }
 
   class Mammal : Animal {
-
     public bool HasFur { get; set; }
 
     public Mammal(string name, int age, string habitat, string foodType, bool hasFur) : base(name, age, habitat, foodType) {
@@ -33,8 +32,8 @@ namespace ZooLab {
       return base.GetInfo() + $", Type: Mammal, Has Fur: {(HasFur ? "Yes" : "No")}";
     }
   }
-  class Bird : Animal {
 
+  class Bird : Animal {
     public double WingSpan {  get; set; }
 
     public Bird(string name, int age, string habitat, string foodType, double wingSpan) : base(name, age, habitat, foodType) {
@@ -45,8 +44,8 @@ namespace ZooLab {
       return base.GetInfo() + $", Type: Bird, Wing Span: {WingSpan} meters";
     }
   }
-  class Fish : Animal {
 
+  class Fish : Animal {
     public string WaterType {  get; set; }
 
     public Fish(string name, int age, string habitat, string foodType, string waterType) : base(name, age, habitat, foodType) {
@@ -57,8 +56,8 @@ namespace ZooLab {
       return base.GetInfo() + $", Type: Fish, Water Type: {WaterType}";
     }
   }
-  class Reptile : Animal {
 
+  class Reptile : Animal {
     public bool IsVenomous {  get; set; }
 
     public Reptile(string name, int age, string habitat, string foodType, bool isVenomous) : base(name, age, habitat, foodType) {
@@ -69,8 +68,8 @@ namespace ZooLab {
       return base.GetInfo() + $", Type: Reptile, Venomous: {(IsVenomous ? "Yes" : "No")}";
     }
   }
-  class Amphibian : Animal {
 
+  class Amphibian : Animal {
     public string SkinMoisture {  get; set; }
 
     public Amphibian(string name, int age, string habitat, string foodType, string skinMoisture) : base(name, age, habitat, foodType) {
