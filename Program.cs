@@ -21,6 +21,7 @@ namespace ZooLab {
   }
 
   class Mammal : Animal {
+
     public bool HasFur { get; set; }
 
     public Mammal(string name, int age, string habitat, string foodType, bool hasFur) : base(name, age, habitat, foodType) {
@@ -33,36 +34,43 @@ namespace ZooLab {
     }
   }
   class Bird : Animal {
+
     public double WingSpan {  get; set; }
 
     public Bird(string name, int age, string habitat, string foodType, double wingSpan) : base(name, age, habitat, foodType) {
       WingSpan = wingSpan;
     }
+
     public override string GetInfo() {
       return base.GetInfo() + $", Type: Bird, Wing Span: {WingSpan} meters";
     }
   }
   class Fish : Animal {
+
     public string WaterType {  get; set; }
 
     public Fish(string name, int age, string habitat, string foodType, string waterType) : base(name, age, habitat, foodType) {
       WaterType = waterType;
     }
+
     public override string GetInfo() {
       return base.GetInfo() + $", Type: Fish, Water Type: {WaterType}";
     }
   }
   class Reptile : Animal {
+
     public bool IsVenomous {  get; set; }
 
     public Reptile(string name, int age, string habitat, string foodType, bool isVenomous) : base(name, age, habitat, foodType) {
       IsVenomous = isVenomous;
     }
+
     public override string GetInfo() {
       return base.GetInfo() + $", Type: Reptile, Venomous: {(IsVenomous ? "Yes" : "No")}";
     }
   }
   class Amphibian : Animal {
+
     public string SkinMoisture {  get; set; }
 
     public Amphibian(string name, int age, string habitat, string foodType, string skinMoisture) : base(name, age, habitat, foodType) {
@@ -85,6 +93,7 @@ namespace ZooLab {
         if (instance == null) { 
           instance = new AnimalManager();
         }
+
         return instance;
       }
     }
@@ -146,6 +155,7 @@ namespace ZooLab {
             } else { 
               Console.WriteLine("Invalid input.");
             }
+
             break;
 
           case "0":
@@ -218,6 +228,7 @@ namespace ZooLab {
     }
   }
   class Program {
+
     static void Main() {
       AnimalManager.Instance.AddAnimal(new Mammal("Leo", 5, "Savanna", "Carnivore", true));
       AnimalManager.Instance.AddAnimal(new Bird("Red", 2, "Savanna", "Carnivore", 2.5));
