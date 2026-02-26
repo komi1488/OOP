@@ -22,6 +22,7 @@ namespace ZooLab {
 
   class Mammal : Animal {
     public bool HasFur { get; set; }
+
     public Mammal(string name, int age, string habitat, string foodType, bool hasFur) : base(name, age, habitat, foodType) {
 
       HasFur = hasFur;
@@ -29,6 +30,47 @@ namespace ZooLab {
 
     public override string GetInfo() {
       return base.GetInfo() + $", Type: Mammal, Has Fur: {(HasFur ? "Yes" : "No")}";
+    }
+  }
+  class Bird : Animal {
+    public double WingSpan {  get; set; }
+
+    public Bird(string name, int age, string habitat, string foodType, double wingSpan) : base(name, age, habitat, foodType) {
+      WingSpan = wingSpan;
+    }
+    public override string GetInfo() {
+      return base.GetInfo() + $", Type: Bird, Wing Span: {WingSpan} meters";
+    }
+  }
+  class Fish : Animal {
+    public string WaterType {  get; set; }
+
+    public Fish(string name, int age, string habitat, string foodType, string waterType) : base(name, age, habitat, foodType) {
+      WaterType = waterType;
+    }
+    public override string GetInfo() {
+      return base.GetInfo() + $", Type: Fish, Water Type: {WaterType}";
+    }
+  }
+  class Reptile : Animal {
+    public bool IsVenomous {  get; set; }
+
+    public Reptile(string name, int age, string habitat, string foodType, bool isVenomous) : base(name, age, habitat, foodType) {
+      IsVenomous = isVenomous;
+    }
+    public override string GetInfo() {
+      return base.GetInfo() + $", Type: Reptile, Venomous: {(IsVenomous ? "Yes" : "No")}";
+    }
+  }
+  class Amphibian : Animal {
+    public string SkinMoisture {  get; set; }
+
+    public Amphibian(string name, int age, string habitat, string foodType, string skinMoisture) : base(name, age, habitat, foodType) {
+      SkinMoisture = skinMoisture;
+    }
+
+    public override string GetInfo() {
+      return base.GetInfo() + $", Type: Amphibian, Skin Moisture: {SkinMoisture}";
     }
   }
 
@@ -40,8 +82,9 @@ namespace ZooLab {
 
     public static AnimalManager Instance {
       get {
-        if (instance == null)
+        if (instance == null) { 
           instance = new AnimalManager();
+        }
         return instance;
       }
     }
@@ -50,7 +93,7 @@ namespace ZooLab {
       animals.Add(animal);
     }
 
-    public void ShowAll() {
+    public void ShowAllAnimals() {
       int currentIndex;
 
       if (animals.Count == 0) {
@@ -66,16 +109,14 @@ namespace ZooLab {
       }
     }
 
-    public void ShowByNumber(int userNumber) {
+    public void GetByNumber(int userNumber) {
       int internalIndex;
 
       internalIndex = userNumber;
 
       if (internalIndex > 0 && internalIndex <= animals.Count) {
-        Console.WriteLine(
-          animals[internalIndex - 1].GetInfo());
-      }
-      else {
+        Console.WriteLine(animals[internalIndex - 1].GetInfo());
+      } else {
         Console.WriteLine("Invalid number.");
       }
     }
@@ -91,7 +132,7 @@ namespace ZooLab {
 
         switch (userChoice) {
           case "1":
-            ShowAll();
+            ShowAllAnimals();
             break;
 
           case "2":
@@ -100,10 +141,11 @@ namespace ZooLab {
 
           case "3":
             Console.Write("Enter number: ");
-            if (int.TryParse(Console.ReadLine(), out parsedNumber))
-              ShowByNumber(parsedNumber);
-            else
+            if (int.TryParse(Console.ReadLine(), out parsedNumber)) { 
+              GetByNumber(parsedNumber);
+            } else { 
               Console.WriteLine("Invalid input.");
+            }
             break;
 
           case "0":
@@ -117,37 +159,75 @@ namespace ZooLab {
     }
 
     private void CreateAnimal() {
-      string name;
-      int age;
-      string habitat;
-      string food;
-      bool hasFur;
-
+      Console.WriteLine("Choose animal type:");
+      Console.WriteLine("1 - Mammal");
+      Console.WriteLine("2 - Bird");
+      Console.WriteLine("3 - Fish");
+      Console.WriteLine("4 - Reptile");
+      Console.WriteLine("5 - Amphibian");
+    
+      string typeChoice = Console.ReadLine();
+    
       Console.Write("Name: ");
-      name = Console.ReadLine();
-
+      string name = Console.ReadLine();
+    
       Console.Write("Age: ");
-      age = int.Parse(Console.ReadLine());
-
+      int age = int.Parse(Console.ReadLine());
+    
       Console.Write("Habitat: ");
-      habitat = Console.ReadLine();
-
+      string habitat = Console.ReadLine();
+    
       Console.Write("Food Type: ");
-      food = Console.ReadLine();
+      string foodType = Console.ReadLine();
 
-      Console.Write("Has fur (true/false): ");
-      hasFur = bool.Parse(Console.ReadLine());
+      switch (typeChoice) {
+        case "1": // Mammal
+          Console.Write("Has fur (true/false): ");
+          bool hasFur = bool.Parse(Console.ReadLine());
+          AddAnimal(new Mammal(name, age, habitat, foodType, hasFur));
+          Console.WriteLine("Mammal added successfully.");
+          break;
 
-      AddAnimal(new Mammal(name, age, habitat, food, hasFur));
+        case "2": // Bird
+          Console.Write("Wing span (meters): ");
+          double wingSpan = double.Parse(Console.ReadLine());
+          AddAnimal(new Bird(name, age, habitat, foodType, wingSpan));
+          Console.WriteLine("Bird added successfully.");
+          break;
+
+        case "3": // Fish
+          Console.Write("Water type (Freshwater/Saltwater): ");
+          string waterType = Console.ReadLine();
+          AddAnimal(new Fish(name, age, habitat, foodType, waterType));
+          Console.WriteLine("Fish added successfully.");
+          break;
+
+        case "4": // Reptile
+          Console.Write("Is venomous (true/false): ");
+          bool isVenomous = bool.Parse(Console.ReadLine());
+          AddAnimal(new Reptile(name, age, habitat, foodType, isVenomous));
+          Console.WriteLine("Reptile added successfully.");
+          break;
+
+        case "5": // Amphibian
+          Console.Write("Skin moisture: ");
+          string skinMoisture = Console.ReadLine();
+          AddAnimal(new Amphibian(name, age, habitat, foodType, skinMoisture));
+          Console.WriteLine("Amphibian added successfully.");
+          break;
+
+        default:
+          Console.WriteLine("Invalid animal type. Animal not added.");
+          break;
+      }
     }
   }
-
   class Program {
     static void Main() {
-      AnimalManager.Instance.AddAnimal(
-        new Mammal("Leo", 5, "Savanna", "Carnivore", true));
+      AnimalManager.Instance.AddAnimal(new Mammal("Leo", 5, "Savanna", "Carnivore", true));
+      AnimalManager.Instance.AddAnimal(new Bird("Red", 2, "Savanna", "Carnivore", 2.5));
 
       AnimalManager.Instance.ShowMenu();
     }
   }
-}
+} 
