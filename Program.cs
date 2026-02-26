@@ -159,12 +159,7 @@ namespace ZooLab {
     }
 
     private void CreateAnimal() {
-      Console.WriteLine("Choose animal type:");
-      Console.WriteLine("1 - Mammal");
-      Console.WriteLine("2 - Bird");
-      Console.WriteLine("3 - Fish");
-      Console.WriteLine("4 - Reptile");
-      Console.WriteLine("5 - Amphibian");
+      Console.WriteLine("Choose animal type:" + "\n1 - Mammal" + "\n2 - Bird" + "\n3 - Fish" + "\n4 - Reptile" + "\n5 - Amphibian\n");
     
       string typeChoice = Console.ReadLine();
     
